@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+    <h1>
+        <a routerLink="">
+            <button mat-button>
+                {{title}}
+            </button>
+        </a>
+    </h1>
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container" autosize>
+    <mat-sidenav class="sidenav" mode="side" opened fxHide.lt-md="true">
+        <div *ngFor="let user of users" class="user">
+            <a routerLink="user/{{user}}">
+                <button mat-button>
+                    {{user}}
+                </button>
+            </a>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BackendService } from '../backend.service';
 
 @Component({
   selector: 'app-overview',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OverviewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private backendService: BackendService) { }
 
   ngOnInit(): void {
+  }
+
+  update() {
+    this.backendService.update().subscribe(response => {
+      console.log(response);
+    }, error => {
+      console.log(error);
+    })
   }
 
 }
