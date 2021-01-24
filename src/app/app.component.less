@@ -1,3 +1,5 @@
+@toolbarHeight: 64px;
+
 h1 {
     margin: auto;
     button {
@@ -8,7 +10,7 @@ h1 {
 
 .sidenav-container {
     position: absolute;
-    top: 64px;
+    top: @toolbarHeight;
     right: 0;
     bottom: 0;
     left: 0;
@@ -17,13 +19,23 @@ h1 {
 .user {
     button {
         font-size: 18px;
-        width: 100%;
         text-align: start;
-        padding: 8px 64px 8px 32px;
         color: #dddddd;
+        padding: 8px 64px 8px 32px;
+        width: 100%;
+        border-radius: 0;
 
         :hover {
             color: #ffffff;
         }
     }
+}
+
+.active-route button {
+    color: #f44336;
+    background-color: rgba(198, 40, 40, 0.3);
+}
+
+.content {
+    padding: 20px;
 }

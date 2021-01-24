@@ -18,17 +18,10 @@ export class BackendService {
   }
 
   getTable(user: string) {
-    let url = this.backendUrl + 'table';
-    if (user) {
-      url += `/${user}`;
-    }
-    return this.http.get(url);
+    return this.http.get(this.backendUrl + 'table/' + user);
   }
 
   getPoints(user: string) {
-    if (!user) {
-      return;
-    }
     return this.http.get(this.backendUrl + 'points/' + user);
   }
 }

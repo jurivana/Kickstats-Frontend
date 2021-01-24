@@ -5,7 +5,11 @@ a {
     color: inherit;
 }
 
-@background: #303030;
+:root {
+    --background: #303030;
+    --primary: #c62828;
+    --accent: #37474f;
+}
 
 ::-webkit-scrollbar {
     width: 5px;
@@ -16,4 +20,35 @@ a {
 ::-webkit-scrollbar-thumb {
     border-radius: 7px;
     background: #777777;
+}
+
+.mat-tab-body-wrapper {
+    margin: 40px 0;
+}
+
+td, th {
+    padding: 5px !important;
+    &.right {
+        text-align: right !important;
+    }
+    &.center {
+        text-align: center !important;
+    }
+}
+
+tr {
+    >:first-child {
+        padding-left: 10px !important;
+    }
+    >:last-child {
+        padding-right: 10px !important;
+    }
+}
+
+tr.td-row:hover {
+    background-color: #383838;
+}
+
+.mat-icon {
+    vertical-align: middle;
 }
