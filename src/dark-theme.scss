@@ -16,7 +16,7 @@ $kickstats-typography: mat-typography-config(
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $kickstats-primary: mat-palette($mat-red, 800, 600, 900);
-$kickstats-accent: mat-palette($mat-blue-grey, 800, 600, 900);
+$kickstats-accent: mat-palette($mat-blue-grey, 700, 600, 900);
 
 // The warn palette is optional (defaults to red).
 $kickstats-warn: mat-palette($mat-red);

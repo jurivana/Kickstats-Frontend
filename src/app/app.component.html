@@ -1,5 +1,8 @@
 <mat-toolbar color="primary">
-    <h1>
+    <button fxHide.gt-sm mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon class="menu">menu</mat-icon>
+    </button>
+    <h1 ngClass.lt-md="mobile">
         <a routerLink="">
             <button mat-button>
                 {{title}}
@@ -7,8 +10,8 @@
         </a>
     </h1>
 </mat-toolbar>
-<mat-sidenav-container class="sidenav-container" autosize>
-    <mat-sidenav class="sidenav" mode="side" opened fxHide.lt-md>
+<mat-sidenav-container class="sidenav-container" autosize ngClass.xs="mobile">
+    <mat-sidenav class="sidenav" [mode]="isMobile ? 'over' : 'side'" [opened]='!isMobile' #sidenav (click)="isMobile && sidenav.toggle()">
         <div *ngFor="let user of users" class="user">
             <a routerLink="user/{{user}}" routerLinkActive="active-route">
                 <button mat-button>

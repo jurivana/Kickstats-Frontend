@@ -1,0 +1,45 @@
+.mat-card {
+    justify-content: center;
+    text-align: center;
+    background-color: #455a64;
+}
+
+@top-team-size: 60px;
+@bot-team-size: 35px;
+
+.highlights-top {
+    height: 100%;
+    .highlights-team {
+        width: @top-team-size;
+        height: @top-team-size;
+    }
+    .highlights-score {
+        font-size: @top-team-size / 2;
+        font-weight: bold;
+    }
+    .username {
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+
+.highlights-bot {
+    height: 55px;
+    .highlights-team {
+        width: @bot-team-size;
+        height: @bot-team-size;
+    }
+    .highlights-score {
+        font-size: @bot-team-size / 2;
+    }
+}
+
+.mat-card-footer {
+    background-color: #263238;
+    padding: 10px 0;
+}
+
+.mat-card-content {
+    height: 80px;
+    vertical-align: middle;
+}

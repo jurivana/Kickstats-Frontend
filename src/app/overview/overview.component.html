@@ -1,2 +1,16 @@
-<h1>EZPZ+</h1>
-<button mat-flat-button color="primary" (click)="update()">Aktualisieren</button>
+<div fxLayout="column" fxLayoutGap="50px">
+    <div class="header">
+        <h1>EZPZ+</h1>
+        <button mat-flat-button color="primary" (click)="update()" [disabled]="loading">
+            <mat-progress-spinner *ngIf="loading" mode="indeterminate" diameter="" color="primary" class="update-spinner"></mat-progress-spinner>
+            <span *ngIf="!loading">Aktualisieren</span>
+        </button>
+        <div class="meta" fxLayout="column">
+            <span>Zuletzt aktualisiert: {{meta['last_updated']}}</span>
+            <span *ngIf="meta['curr_gd'] > 0">Spieltag {{meta['curr_gd']}}</span>
+        </div>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="30px grid" fxLayoutAlign="center" class="highlight-grid">
+        <app-highlight-card-overview fxFlex="280px" *ngFor="let highlight of highlight_info" [title]="highlight.title" [subtitle]="highlight.subtitle" [stats]="highlights[highlight.name]"></app-highlight-card-overview>
+    </div>
+</div>

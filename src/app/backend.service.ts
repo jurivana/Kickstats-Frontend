@@ -13,6 +13,10 @@ export class BackendService {
     return this.http.get(this.backendUrl + 'update');
   }
 
+  getMeta() {
+    return this.http.get(this.backendUrl + 'meta');
+  }
+
   getUsers() {
     return this.http.get(this.backendUrl + 'users');
   }
@@ -23,5 +27,13 @@ export class BackendService {
 
   getPoints(user: string) {
     return this.http.get(this.backendUrl + 'points/' + user);
+  }
+
+  getHighlights(user: string | null = null) {
+    let url = this.backendUrl + 'highlights';
+    if (user) {
+      url += '/' + user;
+    }
+    return this.http.get(url);
   }
 }

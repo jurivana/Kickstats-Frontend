@@ -1,0 +1,16 @@
+<mat-card *ngIf="stats">
+    <mat-card-title>{{title}}</mat-card-title>
+    <mat-card-subtitle>{{subtitle}}</mat-card-subtitle>
+    <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="space-evenly" class="highlights-top">
+            <mat-icon *ngIf="stats[0][0]" [ngClass]="'highlights-team'" svgIcon="{{stats[0][0]}}"></mat-icon>
+            <span class="highlights-score" fxFlexAlign="center">{{stats[0][1] | number}}</span>
+        </div>
+    </mat-card-content>
+    <mat-card-footer fxLayout="column" fxLayoutGap="10px" *ngIf="stats[1]">
+        <div fxLayout="row" fxLayoutAlign="space-evenly" class="highlights-bot" *ngFor="let stat of stats; let i = index" [fxHide]="i == 0">
+            <mat-icon *ngIf="i > 0" [ngClass]="'highlights-team'" svgIcon="{{stat[0]}}"></mat-icon>
+            <span *ngIf="i > 0" class="highlights-score" fxFlexAlign="center">{{stat[1]}}</span>
+        </div>
+    </mat-card-footer>
+</mat-card>

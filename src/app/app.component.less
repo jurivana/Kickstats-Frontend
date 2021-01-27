@@ -1,7 +1,4 @@
-@toolbarHeight: 64px;
-
 h1 {
-    margin: auto;
     button {
         font-weight: bold;
         font-size: 24px;
@@ -10,10 +7,13 @@ h1 {
 
 .sidenav-container {
     position: absolute;
-    top: @toolbarHeight;
+    top: 64px;
     right: 0;
     bottom: 0;
     left: 0;
+    &.mobile {
+        top: 56px;
+    }
 }
 
 .user {
@@ -38,4 +38,8 @@ h1 {
 
 .content {
     padding: 20px;
+}
+
+.menu {
+    margin-bottom: 3px;
 }

@@ -1,129 +1,165 @@
 <mat-tab-group mat-align-tabs="center" animationDuration="0ms" #tabs>
   <mat-tab label="Highlights">
-    Content 1
+    <div fxLayout="row wrap" fxLayoutGap="30px grid" fxLayoutAlign="center" class="highlight-grid">
+      <app-highlight-card fxFlex="280px" *ngFor="let highlight of highlight_small_info" [title]="highlight.title" [subtitle]="highlight.subtitle" [stats]="highlights[highlight.name]"></app-highlight-card>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="30px grid" fxLayoutAlign="center" class="highlight-grid">
+      <app-highlight-card fxFlex="280px" *ngFor="let highlight of highlight_info" [title]="highlight.title" [subtitle]="highlight.subtitle" [stats]="highlights[highlight.name]"></app-highlight-card>
+    </div>
   </mat-tab>
   <mat-tab label="Tabelle">
-    <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="30px" fxLayoutAlign="center">
-      <table mat-table *ngFor="let table of tables; let i = index" [dataSource]="table['total']" fxFlex.lg="50%" fxFlex.xl="40%">
-        <ng-container matColumnDef="rank">
-          <th mat-header-cell *matHeaderCellDef class="center">#</th>
-          <td mat-cell *matCellDef="let team" class="center">{{team.rank}}</td>
-        </ng-container>
+    <div fxLayout="column">
+      <div fxLayout="row">
+        <div fxFlex.xl="10%"></div>
+        <mat-button-toggle-group #togglegroup value="total" fxFlexOffset.xl="-15px" (change)="setTableType($event)">
+          <mat-button-toggle value="total">
+            Gesamt
+          </mat-button-toggle>
+          <mat-button-toggle value="home">
+            Heim
+          </mat-button-toggle>
+          <mat-button-toggle value="away">
+            Auswärts
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      <div fxLayout.gt-md="row" fxLayout.lt-lg="column" fxLayoutGap="30px" fxLayoutAlign="center">
+        <table mat-table *ngFor="let table of tables; let i = index" [dataSource]="table[tableType]" fxFlex.lg="50%" fxFlex.xl="40%" color="accent">
+          <ng-container matColumnDef="rank">
+            <th mat-header-cell *matHeaderCellDef class="center">#</th>
+            <td mat-cell *matCellDef="let team" class="center">{{team.rank}}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="logo">
-          <th mat-header-cell *matHeaderCellDef class="center"></th>
-          <td mat-cell *matCellDef="let team" class="center">
-            <mat-icon svgIcon="{{team.team}}"></mat-icon>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="logo">
+            <th mat-header-cell *matHeaderCellDef class="center"></th>
+            <td mat-cell *matCellDef="let team" class="center">
+              <mat-icon svgIcon="{{team.team}}"></mat-icon>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="rank_diff">
-          <th mat-header-cell *matHeaderCellDef class="center" [hidden]="i > 0"></th>
-          <td mat-cell *matCellDef="let team" class="center" [hidden]="i > 0" [ngClass]="{'vgood': team.rank_diff == 0, 'good': team.rank_diff > 0 && team.rank_diff <= 2, 'ok' : team.rank_diff> 2 &&
-            team.rank_diff <= 5, 'bad' : team.rank_diff> 5 && team.rank_diff <= 10, 'vbad' : team.rank_diff> 10}">
-            <mat-icon class="rank_diff_icon">{{team.rank_diff_icon}}</mat-icon>
-            <span class="rank_diff">{{team.rank_diff}}</span>
-          </td>
-        </ng-container>
-    
-        <ng-container matColumnDef="team">
-          <th mat-header-cell *matHeaderCellDef>Verein</th>
-          <td mat-cell *matCellDef="let team">{{team.team}}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="games">
-          <th mat-header-cell *matHeaderCellDef class="center">Sp</th>
-          <td mat-cell *matCellDef="let team" class="center">{{team.games}}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="wins">
-          <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>S</th>
-          <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.wins}}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="draws">
-          <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>U</th>
-          <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.draws}}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="losses">
-          <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>N</th>
-          <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.losses}}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="goals">
-          <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>T</th>
-          <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.goals}}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="goals_against">
-          <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>GT</th>
-          <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.goals_against}}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="diff">
-          <th mat-header-cell *matHeaderCellDef class="center">TD</th>
-          <td mat-cell *matCellDef="let team" class="center">{{team.diff}}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="points">
-          <th mat-header-cell *matHeaderCellDef class="center">Pkt</th>
-          <td mat-cell *matCellDef="let team" class="center"><b>{{team.points}}</b></td>
-        </ng-container>
-    
-        <tr mat-header-row *matHeaderRowDef="displayedTableColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedTableColumns;" class="td-row"></tr>
-      </table>
+          <ng-container matColumnDef="rank_diff">
+            <th mat-header-cell *matHeaderCellDef class="center" [hidden]="i > 0"></th>
+            <td mat-cell *matCellDef="let team" class="center" [hidden]="i > 0" [ngClass]="{'vgood': team.rank_diff == 0, 'good': team.rank_diff > 0 && team.rank_diff <= 2, 'ok' : team.rank_diff> 2 &&
+              team.rank_diff <= 5, 'bad' : team.rank_diff> 5 && team.rank_diff <= 10, 'vbad' : team.rank_diff> 10}">
+              <mat-icon class="rank_diff_icon">{{team.rank_diff_icon}}</mat-icon>
+              <span class="rank_diff">{{team.rank_diff}}</span>
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="team">
+            <th mat-header-cell *matHeaderCellDef>Verein</th>
+            <td mat-cell *matCellDef="let team">{{team.team}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="games">
+            <th mat-header-cell *matHeaderCellDef class="center">Sp</th>
+            <td mat-cell *matCellDef="let team" class="center">{{team.games}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="wins">
+            <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>S</th>
+            <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.wins}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="draws">
+            <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>U</th>
+            <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.draws}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="losses">
+            <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>N</th>
+            <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.losses}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="goals">
+            <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>T</th>
+            <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.goals}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="goals_against">
+            <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>GT</th>
+            <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.goals_against}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="diff">
+            <th mat-header-cell *matHeaderCellDef class="center">TD</th>
+            <td mat-cell *matCellDef="let team" class="center">{{team.diff}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="points">
+            <th mat-header-cell *matHeaderCellDef class="center">Pkt</th>
+            <td mat-cell *matCellDef="let team" class="center"><b>{{team.points}}</b></td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedTableColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedTableColumns;" class="td-row"></tr>
+        </table>
+      </div>
     </div>
   </mat-tab>
   <mat-tab label="Punkte">
-    <div fxLayout fxLayoutAlign="center">
-      <table mat-table [dataSource]="points['total']" fxFlex.lt-lg="100%" fxFlex.gt-md="50%">
-        <ng-container matColumnDef="rank">
-          <th mat-header-cell *matHeaderCellDef class="center">#</th>
-          <td mat-cell *matCellDef="let team" class="center">{{team.rank}}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="logo">
-          <th mat-header-cell *matHeaderCellDef class="center"></th>
-          <td mat-cell *matCellDef="let team" class="center">
-            <mat-icon svgIcon="{{team.team}}"></mat-icon>
-          </td>
-        </ng-container>
-    
-        <ng-container matColumnDef="team">
-          <th mat-header-cell *matHeaderCellDef>Verein</th>
-          <td mat-cell *matCellDef="let team">{{team.team}}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="zero_points">
-          <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>0P</th>
-          <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.zero_points}}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="two_points">
-          <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>2P</th>
-          <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.two_points}}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="three_points">
-          <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>3P</th>
-          <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.three_points}}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="four_points">
-          <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>4P</th>
-          <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.four_points}}</td>
-        </ng-container>
-    
-        <ng-container matColumnDef="points">
-          <th mat-header-cell *matHeaderCellDef class="center">Pkt</th>
-          <td mat-cell *matCellDef="let team" class="center"><b>{{team.points}}</b></td>
-        </ng-container>
-    
-        <tr mat-header-row *matHeaderRowDef="displayedPointColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedPointColumns;" class="td-row"></tr>
-      </table>
+    <div fxLayout="column">
+      <div fxLayout="row">
+        <mat-button-toggle-group #togglegroup value="total" fxFlexOffset.gt-md="25%" (change)="setPointsType($event)">
+          <mat-button-toggle value="total">
+            Gesamt
+          </mat-button-toggle>
+          <mat-button-toggle value="home">
+            Heim
+          </mat-button-toggle>
+          <mat-button-toggle value="away">
+            Auswärts
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center">
+        <table mat-table [dataSource]="points[pointsType]" fxFlex.lt-lg="100%" fxFlex.gt-md="50%">
+          <ng-container matColumnDef="rank">
+            <th mat-header-cell *matHeaderCellDef class="center">#</th>
+            <td mat-cell *matCellDef="let team" class="center">{{team.rank}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="logo">
+            <th mat-header-cell *matHeaderCellDef class="center"></th>
+            <td mat-cell *matCellDef="let team" class="center">
+              <mat-icon svgIcon="{{team.team}}"></mat-icon>
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="team">
+            <th mat-header-cell *matHeaderCellDef>Verein</th>
+            <td mat-cell *matCellDef="let team">{{team.team}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="zero_points">
+            <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>0P</th>
+            <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.zero_points}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="two_points">
+            <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>2P</th>
+            <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.two_points}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="three_points">
+            <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>3P</th>
+            <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.three_points}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="four_points">
+            <th mat-header-cell *matHeaderCellDef class="center" fxHide.xs>4P</th>
+            <td mat-cell *matCellDef="let team" class="center" fxHide.xs>{{team.four_points}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="points">
+            <th mat-header-cell *matHeaderCellDef class="center">Pkt</th>
+            <td mat-cell *matCellDef="let team" class="center"><b>{{team.points}}</b></td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedPointColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedPointColumns;" class="td-row"></tr>
+        </table>
+      </div>
     </div>
   </mat-tab>
 </mat-tab-group>
