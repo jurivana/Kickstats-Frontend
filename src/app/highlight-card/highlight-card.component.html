@@ -4,7 +4,7 @@
     <mat-card-content>
         <div fxLayout="row" fxLayoutAlign="space-evenly" class="highlights-top">
             <mat-icon *ngIf="stats[0][0]" [ngClass]="'highlights-team'" svgIcon="{{stats[0][0]}}"></mat-icon>
-            <span class="highlights-score" fxFlexAlign="center">{{stats[0][1] | number}}</span>
+            <span class="highlights-score" fxFlexAlign="center">{{stats[0][1] | number:'':'de'}}</span>
         </div>
     </mat-card-content>
     <mat-card-footer fxLayout="column" fxLayoutGap="10px" *ngIf="stats[1]">

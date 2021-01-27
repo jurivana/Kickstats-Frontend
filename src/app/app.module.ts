@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +25,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HighlightCardOverviewComponent } from './highlight-card-overview/highlight-card-overview.component';
 
+registerLocaleData(localeDe);
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +52,9 @@ import { HighlightCardOverviewComponent } from './highlight-card-overview/highli
     MatCardModule,
     MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'de'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
