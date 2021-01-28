@@ -2,6 +2,7 @@
   "name": "kickstats",
   "version": "0.0.0",
   "scripts": {
+    "start:prod": "node server.js",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -22,6 +23,7 @@
     "@angular/platform-browser": "~11.0.9",
     "@angular/platform-browser-dynamic": "~11.0.9",
     "@angular/router": "~11.0.9",
+    "express": "^4.17.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

@@ -9,7 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  title = 'Kickstats';
+  title = 'kickstats';
   users: string[] = [];
   isMobile = false;
 

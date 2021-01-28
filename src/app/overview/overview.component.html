@@ -7,10 +7,10 @@
         </button>
         <div class="meta" fxLayout="column" [ngClass]="{'loading': loading}">
             <span>Zuletzt aktualisiert: {{meta['last_updated']}}</span>
-            <span *ngIf="meta['curr_gd'] > 0">Spieltag {{meta['curr_gd']}}</span>
+            <span *ngIf="meta['curr_gd'] > 0" class="gd" matTooltip="Spieltage können erst nach dem gesamten Spieltag aktualisiert werden" matTooltipPosition="below">Spieltag {{meta['curr_gd']}} <mat-icon class="info" inline>info_outline</mat-icon></span>
         </div>
     </div>
-    <div fxLayout="row wrap" fxLayoutGap="30px grid" fxLayoutAlign="center" class="highlight-grid">
+    <div fxLayout="row wrap" fxLayoutGap="30px grid" fxLayoutAlign="center" class="highlight-grid" *ngIf="highlights['most_points']?.length > 0">
         <app-highlight-card-overview fxFlex="280px" *ngFor="let highlight of highlight_info" [title]="highlight.title" [subtitle]="highlight.subtitle" [stats]="highlights[highlight.name]"></app-highlight-card-overview>
     </div>
 </div>
