@@ -5,7 +5,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class BackendService {
-  backendUrl = 'http://kickstatsapi.herokuapp.com/api/'
+  backendUrl = 'https://kickstatsapi.herokuapp.com/api/'
+  // backendUrl = 'http://localhost:8000/api/'
 
   constructor(private http: HttpClient) { }
 

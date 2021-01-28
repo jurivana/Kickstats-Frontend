@@ -7,7 +7,7 @@
         </button>
         <div class="meta" fxLayout="column" [ngClass]="{'loading': loading}">
             <span>Zuletzt aktualisiert: {{meta['last_updated']}}</span>
-            <span *ngIf="meta['curr_gd'] > 0" class="gd" matTooltip="Spieltage können erst nach dem gesamten Spieltag aktualisiert werden" matTooltipPosition="below">Spieltag {{meta['curr_gd']}} <mat-icon class="info" inline>info_outline</mat-icon></span>
+            <span *ngIf="meta['curr_gd'] > 0" class="gd" matTooltip="Spieltage können erst nach dem gesamten Spieltag aktualisiert werden" matTooltipPosition="below" #tooltip="matTooltip" (click)="tooltip.toggle()">Spieltag {{meta['curr_gd']}} <mat-icon class="info" inline>info_outline</mat-icon></span>
         </div>
     </div>
     <div fxLayout="row wrap" fxLayoutGap="30px grid" fxLayoutAlign="center" class="highlight-grid" *ngIf="highlights['most_points']?.length > 0">
