@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { OverviewComponent } from './overview/overview.component';
 import { UserComponent } from './user/user.component';
 import { HighlightCardComponent } from './highlight-card/highlight-card.component';
+import { HighlightCardOverviewComponent } from './highlight-card-overview/highlight-card-overview.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -23,7 +24,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { HighlightCardOverviewComponent } from './highlight-card-overview/highlight-card-overview.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 registerLocaleData(localeDe);
 @NgModule({
@@ -50,7 +51,8 @@ registerLocaleData(localeDe);
     LayoutModule,
     MatListModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de'}
