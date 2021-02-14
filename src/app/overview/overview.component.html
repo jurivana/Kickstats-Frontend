@@ -1,10 +1,10 @@
 <div fxLayout="column" fxLayoutGap="50px">
     <div class="header">
         <h1>EZPZ+</h1>
-        <button mat-flat-button color="primary" (click)="update()" [disabled]="loading">
+        <!-- <button mat-flat-button color="primary" (click)="update()" [disabled]="loading">
             <mat-progress-spinner *ngIf="loading" mode="indeterminate" diameter="27.5" color="primary" class="update-spinner"></mat-progress-spinner>
             <span *ngIf="!loading">Aktualisieren</span>
-        </button>
+        </button> -->
         <div class="meta" fxLayout="column" [ngClass]="{'loading': loading}">
             <span>Zuletzt aktualisiert: {{meta['last_updated']}}</span>
             <span *ngIf="meta['curr_gd'] > 0">Spieltag {{meta['curr_gd']}}</span>
