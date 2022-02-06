@@ -1,12 +1,7 @@
 <div fxLayout="column" fxLayoutGap="50px">
   <div class="header">
     <h1>EZPZ+</h1>
-    <button
-      mat-flat-button
-      color="primary"
-      (click)="update()"
-      [disabled]="loading"
-    >
+    <button mat-flat-button color="primary" (click)="update()" [disabled]="loading">
       <mat-progress-spinner
         *ngIf="loading"
         mode="indeterminate"
@@ -25,8 +20,7 @@
         matTooltipPosition="below"
         #tooltip="matTooltip"
         (click)="tooltip.toggle()"
-        >Spieltag {{ meta["curr_gd"] }}
-        <mat-icon class="info" inline>info_outline</mat-icon></span
+        >Spieltag {{ meta["curr_gd"] }} <mat-icon class="info" inline>info_outline</mat-icon></span
       >
     </div>
   </div>
