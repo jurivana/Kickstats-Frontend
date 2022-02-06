@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BackendService {
-  backendUrl = 'https://kickstatsapi.herokuapp.com/api/'
-  // backendUrl = 'http://localhost:8000/api/'
+  private backendUrl = environment.backendUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   update() {
     return this.http.get(this.backendUrl + 'update');
