@@ -29,7 +29,7 @@
     fxLayoutGap="30px grid"
     fxLayoutAlign="center"
     class="highlight-grid"
-    *ngIf="highlights['most_points']?.length > 0"
+    *ngIf="highlights && highlights['most_points']?.length > 0"
   >
     <app-highlight-card-overview
       fxFlex="280px"
